@@ -1,0 +1,407 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Work",
+    "services": "Services",
+    "about": "About",
+    "blog": "Blog",
+    "resume": "Resume",
+    "contact": "Contact"
+  },
+  "ui": {
+    "skip": "Skip to content",
+    "openMenu": "Open navigation",
+    "closeMenu": "Close navigation",
+    "language": "Change language",
+    "theme": "Color theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "viewAll": "View all",
+    "read": "Read the note",
+    "readCase": "Explore the case study",
+    "back": "Back",
+    "minutes": "min read",
+    "undated": "Publication date to be added",
+    "home": "Home",
+    "work": "Selected work",
+    "services": "How I can help",
+    "notes": "From the engineering notebook",
+    "approach": "The engineering process",
+    "experience": "Experience",
+    "education": "Education",
+    "expertise": "Technical expertise",
+    "breadcrumb": "Breadcrumb",
+    "related": "Keep reading",
+    "notFound": "Page not found",
+    "notFoundText": "This route does not lead anywhere. Let’s get you back to the work.",
+    "backHome": "Back to home",
+    "error": "Something went wrong",
+    "errorText": "The page could not be displayed. Please try again.",
+    "retry": "Try again",
+    "loading": "Loading the page…",
+    "privacy": "Privacy",
+    "location": "Tehran, Iran",
+    "unconfigured": "Not configured yet",
+    "download": "Download PDF",
+    "resumePending": "PDF will be available here once configured.",
+    "contactPending": "Contact details are being prepared. No messages are collected by this website.",
+    "socialPending": "Profile link to be added",
+    "schematic": "Architecture schematic · not live telemetry"
+  },
+  "hero": {
+    "eyebrow": "Senior .NET Backend Engineer & Software Architect",
+    "title": "I design, build, and troubleshoot scalable .NET systems.",
+    "description": "I help teams build reliable backend systems, microservices, distributed applications, and production infrastructure — from architecture and implementation to debugging difficult production problems.",
+    "primary": "View My Work",
+    "secondary": "Work With Me",
+    "credibility": "10+ Years of Software Engineering Experience",
+    "caption": "Systems thinking. Production focus.",
+    "visualLabel": "A system, not a collection of services.",
+    "visualNote": "Clear boundaries. Explicit contracts. Reliable communication."
+  },
+  "stats": [
+    {
+      "value": "10+",
+      "label": "Years of professional engineering"
+    },
+    {
+      "value": "6 + 4",
+      "label": "Years across two major professional environments"
+    },
+    {
+      "value": "M.Sc.",
+      "label": "Computer Engineering · Computer Systems Architecture"
+    },
+    {
+      "value": "Production",
+      "label": "Enterprise & distributed systems"
+    }
+  ],
+  "intro": {
+    "eyebrow": "Beyond the code",
+    "title": "Good architecture has to work in production.",
+    "text": "I work where application code, distributed services, identity, and infrastructure meet. My focus is on clear boundaries, reliable behavior, and understanding why a system fails before deciding how to fix it."
+  },
+  "servicesIntro": {
+    "title": "Engineering help for the problems that matter.",
+    "text": "From an architecture decision to a difficult production issue. Focused work, grounded in the system you actually have."
+  },
+  "services": [
+    {
+      "title": "Architecture & Distributed Systems",
+      "description": "Design and review scalable backend architectures, microservices, service boundaries, CQRS, event-driven systems, and distributed workflows.",
+      "outcome": "A design your team can reason about.",
+      "details": [
+        "Service boundary and dependency review",
+        "Distributed workflow and contract design",
+        "Architecture trade-offs and a practical implementation plan"
+      ]
+    },
+    {
+      "title": ".NET Backend Engineering",
+      "description": "Build reliable backend systems and APIs using modern .NET technologies and clean engineering practices.",
+      "outcome": "Backend foundations built to last.",
+      "details": [
+        "ASP.NET Core APIs and application services",
+        "Domain boundaries, persistence and EF Core",
+        "Validation, failure handling and maintainable implementation"
+      ]
+    },
+    {
+      "title": "Identity & Security",
+      "description": "Design and troubleshoot modern authentication and authorization systems.",
+      "outcome": "Identity flows that make sense end to end.",
+      "details": [
+        "OAuth 2.0, OpenID Connect and SSO",
+        "PKCE, token validation and API scopes",
+        "Authentication and authorization troubleshooting"
+      ]
+    },
+    {
+      "title": "Production Troubleshooting",
+      "description": "Find root causes behind difficult backend, infrastructure, networking, authentication, and deployment problems.",
+      "outcome": "Evidence first. Root cause next.",
+      "details": [
+        "Application and cross-service investigation",
+        "DNS, TLS, reverse proxy and container diagnosis",
+        "A reproducible fix and a verification plan"
+      ]
+    }
+  ],
+  "projectsIntro": {
+    "title": "The systems behind the experience.",
+    "text": "Engineering case studies in distributed systems, identity and production infrastructure. Baruq is the primary example; the other studies explain technical approaches without attributing them to invented clients."
+  },
+  "projects": [
+    {
+      "slug": "Baruq",
+      "title": "Baruq",
+      "type": "Multi-Vendor Marketplace",
+      "description": "A production-oriented multi-vendor marketplace platform designed around microservices, event-driven architecture, centralized identity, and containerized infrastructure.",
+      "scope": "Architecture · Backend · Identity · Infrastructure",
+      "tags": ["ASP.NET Core", "RabbitMQ", "gRPC", "Docker"],
+      "kind": "Platform case study"
+    },
+    {
+      "slug": "identity-platform",
+      "title": "Identity Platform",
+      "type": "OAuth 2.0 / OpenID Connect / SSO",
+      "description": "A technical study of secure sign-in, authorization code flows, API scopes and identity boundaries across distributed applications.",
+      "scope": "Identity · Security · API contracts",
+      "tags": ["Duende", "OpenID Connect", "PKCE"],
+      "kind": "Technical case study"
+    },
+    {
+      "slug": "distributed-backend",
+      "title": "Distributed Backend Systems",
+      "type": "Microservices / RabbitMQ / gRPC",
+      "description": "A technical study of service ownership, asynchronous messaging, synchronous contracts and failure handling.",
+      "scope": "Service design · Messaging · Data ownership",
+      "tags": ["MassTransit", "RabbitMQ", "gRPC"],
+      "kind": "Technical case study"
+    },
+    {
+      "slug": "production-infrastructure",
+      "title": "Production Infrastructure",
+      "type": "Docker / Linux / Traefik / DNS / TLS",
+      "description": "A technical study of the delivery path from DNS and TLS to reverse proxies, containers and application services.",
+      "scope": "Deployment · Networking · Troubleshooting",
+      "tags": ["Docker", "Linux", "Traefik"],
+      "kind": "Technical case study"
+    }
+  ],
+  "caseIntro": "A closer look at the engineering decisions, service boundaries and operational concerns behind the platform. This study describes architecture, without claiming user counts, revenue or unprovided performance metrics.",
+  "caseSections": [
+    {
+      "title": "Overview",
+      "body": "Baruq is a multi-vendor marketplace with web and PWA clients. Its engineering concerns span products, sellers, baskets, orders, payment, shipping and identity. The case study focuses on how these responsibilities connect while retaining clear ownership."
+    },
+    {
+      "title": "Architecture",
+      "body": "Microservices own their data through a database-per-service approach. Clients enter through an API Gateway rather than coupling directly to every internal service. Service boundaries should reflect business capabilities, with explicit APIs and messages between them."
+    },
+    {
+      "title": "Authentication & Authorization",
+      "body": "Centralized identity uses Duende and the OAuth 2.0 / OpenID Connect model. JWT validation protects API access; API scopes describe access boundaries, while authorization checks decide which operations a caller can perform. PKCE protects the authorization-code exchange for public clients."
+    },
+    {
+      "title": "Messaging",
+      "body": "RabbitMQ and MassTransit support event-driven communication. Events communicate changes between service boundaries. An event consumer needs to handle duplicate delivery and failure explicitly; messaging is a reliability concern as well as a transport choice."
+    },
+    {
+      "title": "Service Communication",
+      "body": "gRPC supports explicit synchronous service contracts where a response is needed in the current operation. Asynchronous messaging serves work that can proceed independently. The choice depends on consistency needs, latency and what should happen when the other service is unavailable."
+    },
+    {
+      "title": "Product & Seller Architecture",
+      "body": "Product maintains a local SupplierReadModel instead of reading the Seller database directly. This keeps Seller data ownership intact and lets Product answer its own queries. The local model is a projection of the seller information Product needs, rather than a second source of truth."
+    },
+    {
+      "title": "Payment",
+      "body": "The payment boundary separates order intent from gateway interaction. Checkout needs to retain order identity through retries and callbacks. A redirect alone is not evidence of payment: the application must use server-verified payment state."
+    },
+    {
+      "title": "Shipping",
+      "body": "Shipping connects address information, seller ownership and the order workflow. Quotes and selected delivery methods need explicit identifiers so a checkout can be validated against the services responsible for those decisions."
+    },
+    {
+      "title": "Infrastructure",
+      "body": "Docker packages application services for Linux environments. Traefik provides reverse-proxy routing and participates in the TLS termination path. DNS, certificates and forwarding configuration must align with application endpoints and authentication redirect URLs."
+    },
+    {
+      "title": "Engineering Challenges",
+      "body": "The interesting problems live between boundaries: preserving product and variant identity, keeping seller data decoupled, distinguishing synchronous failure from delayed events, and tracing identity or deployment problems across the request path. Each requires explicit contracts and end-to-end validation."
+    }
+  ],
+  "about": {
+    "title": "Engineering complex systems, one problem at a time.",
+    "lead": "I'm a Senior .NET Backend Engineer and Software Architect based in Tehran, Iran, with 10 years of professional experience building enterprise and distributed software systems.",
+    "paragraphs": [
+      "My work spans backend engineering, microservices architecture, authentication, event-driven systems, infrastructure, and production troubleshooting.",
+      "I enjoy solving complex engineering problems where application code, distributed services, security, and infrastructure meet."
+    ],
+    "principles": [
+      {
+        "title": "Clarity before complexity",
+        "text": "Understand the problem and the ownership boundaries before introducing another abstraction."
+      },
+      {
+        "title": "Contracts before assumptions",
+        "text": "Make data, identity, failure behavior and responsibility explicit between services."
+      },
+      {
+        "title": "Validate the whole path",
+        "text": "A local fix is only useful when the complete workflow behaves correctly."
+      }
+    ]
+  },
+  "experienceIntro": {
+    "title": "A decade of professional engineering.",
+    "text": "Ten years across two professional environments. Exact employment dates and organization-specific project details are intentionally not listed."
+  },
+  "experience": [
+    {
+      "company": "Information and Communication Technology Organization of Tehran Municipality",
+      "role": "Programmer / Senior Specialist",
+      "duration": "6 years"
+    },
+    {
+      "company": "Ide Pardazan Houshang Rahbord",
+      "role": "Software Developer",
+      "duration": "4 years"
+    }
+  ],
+  "education": {
+    "degree": "M.Sc. in Computer Engineering",
+    "specialization": "Computer Systems Architecture"
+  },
+  "skills": [
+    {
+      "label": "Backend",
+      "items": ["C#", ".NET", "ASP.NET Core", "EF Core", "REST APIs"]
+    },
+    {
+      "label": "Architecture",
+      "items": [
+        "Microservices",
+        "Distributed Systems",
+        "CQRS",
+        "Clean Architecture",
+        "DDD",
+        "Event-Driven Architecture"
+      ]
+    },
+    {
+      "label": "Messaging",
+      "items": ["RabbitMQ", "MassTransit", "gRPC"]
+    },
+    {
+      "label": "Identity & Security",
+      "items": [
+        "OAuth 2.0",
+        "OpenID Connect",
+        "Duende",
+        "JWT",
+        "PKCE",
+        "API Scopes"
+      ]
+    },
+    {
+      "label": "Infrastructure",
+      "items": ["Docker", "Linux", "Traefik", "DNS", "TLS/SSL"]
+    },
+    {
+      "label": "Data",
+      "items": ["SQL Server"]
+    },
+    {
+      "label": "Frontend / Product",
+      "items": ["Next.js", "React", "TypeScript", "PWA"]
+    }
+  ],
+  "processTitle": "How I solve difficult engineering problems.",
+  "process": [
+    {
+      "title": "Understand",
+      "text": "Define the behavior, constraints and the impact."
+    },
+    {
+      "title": "Investigate",
+      "text": "Follow the evidence across the system."
+    },
+    {
+      "title": "Find the root cause",
+      "text": "Separate the symptom from the mechanism."
+    },
+    {
+      "title": "Design",
+      "text": "Choose the smallest reliable solution."
+    },
+    {
+      "title": "Implement",
+      "text": "Make the change with clear boundaries."
+    },
+    {
+      "title": "Validate",
+      "text": "Verify the full workflow and failure paths."
+    }
+  ],
+  "blogIntro": {
+    "title": "Engineering Notes",
+    "text": "Practical thinking about backend architecture, identity and the places where production systems become difficult. Concepts and design guidance, without invented incident stories."
+  },
+  "resume": {
+    "title": "Experience, in a format you can share.",
+    "text": "Two resume formats for two kinds of conversation. Choose the engineering profile for a role, or the consulting profile for a project.",
+    "engineering": "Engineering Resume",
+    "engineeringText": "Backend engineering, architecture, professional experience and technical expertise.",
+    "consulting": "Consulting Resume",
+    "consultingText": "Architecture reviews, identity integration, production troubleshooting and .NET delivery.",
+    "viewExperience": "Explore professional experience"
+  },
+  "contact": {
+    "title": "Let’s work together.",
+    "text": "Whether you need help designing a distributed backend, troubleshooting a production issue, integrating identity, or building a reliable .NET system, let’s talk.",
+    "hire": "Looking to hire?",
+    "hireRoles": [
+      "Senior Backend Engineer",
+      "Staff Engineer",
+      "Software Architect"
+    ],
+    "help": "Need engineering help?",
+    "helpRoles": [
+      "Architecture Review",
+      "Production Troubleshooting",
+      ".NET Consulting",
+      "Identity / OAuth / OIDC"
+    ],
+    "formTitle": "Start with the problem.",
+    "formText": "A little context makes the first conversation more useful.",
+    "name": "Your name",
+    "email": "Your email",
+    "interest": "What brings you here?",
+    "hiring": "Hiring conversation",
+    "consulting": "Engineering / consulting",
+    "message": "Tell me about the role or problem",
+    "submit": "Open email draft",
+    "hint": "Opens your email application. Nothing is sent or stored by this site.",
+    "pending": "Email is not configured yet. This form cannot send a message.",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "you@company.com",
+    "messagePlaceholder": "The system, the challenge, and what a useful outcome looks like…"
+  },
+  "cta": {
+    "title": "Have a difficult .NET problem?",
+    "text": "Need help with a microservices architecture, production issue, authentication problem, or distributed system?",
+    "button": "Let’s Talk"
+  },
+  "privacy": {
+    "title": "Privacy, without the fine print.",
+    "sections": [
+      {
+        "title": "What this website collects",
+        "text": "This first version has no analytics, advertising trackers, account system or backend contact database. The theme preference is stored locally in your browser."
+      },
+      {
+        "title": "Contact and email",
+        "text": "If an email address is configured, the contact form opens a draft in your email application. The website does not submit, store or deliver the message. Your email provider handles anything you choose to send."
+      },
+      {
+        "title": "External links",
+        "text": "Configured social profiles, resume documents and reference links lead to other services with their own privacy practices. Fonts are served locally from this website."
+      },
+      {
+        "title": "Hosting",
+        "text": "Your hosting provider may process ordinary request information such as IP addresses and server logs. Retention depends on the deployment configuration. Review this page when changing hosting or adding external services."
+      }
+    ]
+  },
+  "footer": {
+    "line": "Reliable systems. Thoughtful engineering.",
+    "copyright": "All rights reserved.",
+    "explore": "Explore",
+    "connect": "Connect",
+    "experience": "Professional experience"
+  }
+}

@@ -1,0 +1,474 @@
+[
+  {
+    "slug": "service-boundaries",
+    "tags": ["Architecture", "Microservices"],
+    "source": "https://learn.microsoft.com/en-us/azure/architecture/microservices/model/domain-analysis",
+    "en": {
+      "title": "Why Microservices Fail When Service Boundaries Are Wrong",
+      "description": "A service boundary is a decision about ownership and change, not a way to divide a codebase into smaller deployments.",
+      "sections": [
+        {
+          "title": "Start with ownership, not endpoints",
+          "paragraphs": [
+            "A service should own a coherent capability and its data. Splitting every entity into a separate deployment can turn a simple business operation into a chain of remote calls. The code is distributed, but the reasoning is still tightly coupled.",
+            "Ask who can change a rule, where its invariants are enforced, and which data must be consistent together. These questions are more useful than counting controllers or tables."
+          ]
+        },
+        {
+          "title": "Look for the cost of a change",
+          "paragraphs": [
+            "If an ordinary change requires coordinated releases across several services, investigate whether the boundary is cutting through one capability. Shared database writes and long synchronous call chains are useful warning signs, not automatic proof that microservices are wrong.",
+            "A modular monolith can be an honest starting point. Clear modules and ownership teach you where a future network boundary might belong."
+          ]
+        },
+        {
+          "title": "Validate the boundary",
+          "paragraphs": [
+            "Trace one complete workflow, including validation, failure and retries. Decide which service makes each decision and what happens when a dependency is unavailable. Use explicit contracts rather than reaching around a service into its database.",
+            "The goal is independent reasoning and manageable change. More services are not an architectural outcome on their own."
+          ]
+        }
+      ]
+    },
+    "fa": {
+      "title": "چرا مرزبندی اشتباه، Microservices را به شکست می‌رساند؟",
+      "description": "مرز سرویس درباره مالکیت و تغییر است؛ نه صرفاً روشی برای تقسیم کد به چند واحد استقرار.",
+      "sections": [
+        {
+          "title": "از مالکیت شروع کنید، نه endpoint",
+          "paragraphs": [
+            "هر سرویس باید یک قابلیت منسجم و داده‌های مربوط به آن را مالک باشد. تبدیل هر موجودیت به یک سرویس مستقل، ممکن است یک عملیات ساده کسب‌وکار را به زنجیره فراخوانی راه دور تبدیل کند. در این حالت کد توزیع شده، اما منطق همچنان به‌شدت وابسته است.",
+            "بپرسید چه بخشی می‌تواند قانون را تغییر دهد، قواعد در کجا تضمین می‌شوند و کدام داده‌ها باید همزمان سازگار بمانند. این پرسش‌ها از شمردن کنترلر یا جدول مفیدترند."
+          ]
+        },
+        {
+          "title": "هزینه تغییر را بررسی کنید",
+          "paragraphs": [
+            "اگر تغییر معمولی به انتشار هماهنگ چند سرویس نیاز دارد، بررسی کنید آیا مرز از میان یک قابلیت عبور کرده است. نوشتن مشترک در پایگاه داده و زنجیره طولانی فراخوانی همزمان، نشانه‌های قابل بررسی هستند؛ نه اثبات خودکار اشتباه بودن Microservices.",
+            "شروع با یکپارچه ماژولار می‌تواند تصمیم درستی باشد. ماژول‌های روشن و مالکیت مشخص نشان می‌دهند مرز شبکه در آینده کجا مناسب است."
+          ]
+        },
+        {
+          "title": "مرز را اعتبارسنجی کنید",
+          "paragraphs": [
+            "یک جریان کامل را همراه اعتبارسنجی، خطا و تلاش مجدد دنبال کنید. مشخص کنید هر تصمیم را کدام سرویس می‌گیرد و هنگام قطع وابستگی چه اتفاقی می‌افتد. از قرارداد صریح استفاده کنید، نه دسترسی مستقیم به پایگاه داده سرویس دیگر.",
+            "هدف، امکان فهم مستقل و تغییر قابل مدیریت است. افزایش تعداد سرویس‌ها به‌خودی‌خود نتیجه معماری نیست."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "debugging-oauth-pkce",
+    "tags": ["Identity", "OAuth 2.0", "PKCE"],
+    "source": "https://datatracker.ietf.org/doc/html/rfc7636",
+    "en": {
+      "title": "Debugging OAuth 2.0 and PKCE in SPAs",
+      "description": "Follow the authorization-code flow one boundary at a time, and distinguish the browser, identity provider and API responsibilities.",
+      "sections": [
+        {
+          "title": "Separate the three participants",
+          "paragraphs": [
+            "The browser application starts the sign-in flow, the identity provider authenticates the user, and the API validates access tokens. A successful login does not prove the API will accept the resulting token.",
+            "Capture the intended issuer, client ID, redirect URI, response type and scopes. Check the exact redirect URI rather than assuming that two similar URLs are equivalent."
+          ]
+        },
+        {
+          "title": "Follow the code exchange",
+          "paragraphs": [
+            "With PKCE, the client creates a verifier and sends a derived challenge in the authorization request. The token request must present the matching verifier. Losing it during a redirect or attempting to reuse a code can make the exchange fail.",
+            "Do not log tokens or verifiers. Check request structure, the timing of storage changes and the identity provider’s sanitized error response instead."
+          ]
+        },
+        {
+          "title": "Then check API authorization",
+          "paragraphs": [
+            "An access token must be intended for the API and issued by the trusted authority. Validate issuer, audience, signature and lifetime before inspecting application permissions. An ID token is not a substitute for an API access token.",
+            "Once authentication succeeds, scope and authorization policy can still deny the operation. Keeping these steps separate makes a 401 or 403 much easier to investigate."
+          ]
+        }
+      ]
+    },
+    "fa": {
+      "title": "عیب‌یابی OAuth 2.0 و PKCE در برنامه‌های SPA",
+      "description": "جریان کد مجوز را مرز به مرز دنبال کنید و مسئولیت مرورگر، سرویس هویت و API را از هم جدا نگه دارید.",
+      "sections": [
+        {
+          "title": "سه نقش را از هم جدا کنید",
+          "paragraphs": [
+            "برنامه مرورگر جریان ورود را شروع می‌کند، سرویس هویت کاربر را احراز می‌کند و API توکن دسترسی را اعتبارسنجی می‌کند. ورود موفق لزوماً به معنی پذیرفته شدن توکن در API نیست.",
+            "صادرکننده مورد انتظار، شناسه کلاینت، نشانی بازگشت، نوع پاسخ و scopeها را مشخص کنید. نشانی بازگشت را دقیق بررسی کنید؛ شباهت دو URL به معنی یکسان بودن آن‌ها نیست."
+          ]
+        },
+        {
+          "title": "تبادل کد را دنبال کنید",
+          "paragraphs": [
+            "در PKCE، کلاینت یک verifier می‌سازد و challenge مشتق‌شده از آن را در درخواست مجوز می‌فرستد. درخواست توکن باید همان verifier متناظر را داشته باشد. از دست رفتن آن هنگام بازگشت مرورگر یا استفاده دوباره از کد، تبادل را ناموفق می‌کند.",
+            "توکن و verifier را در لاگ ننویسید. ساختار درخواست، زمان تغییر فضای ذخیره‌سازی و پاسخ خطای پاک‌سازی‌شده سرویس هویت را بررسی کنید."
+          ]
+        },
+        {
+          "title": "سپس سراغ مجوز API بروید",
+          "paragraphs": [
+            "توکن دسترسی باید برای API مقصد و از مرجع مورد اعتماد صادر شده باشد. پیش از بررسی مجوزهای برنامه، صادرکننده، مخاطب، امضا و زمان اعتبار را بررسی کنید. ID token جایگزین access token برای API نیست.",
+            "پس از احراز هویت موفق، scope یا سیاست مجوز همچنان ممکن است عملیات را رد کند. جدا نگه داشتن این مراحل، بررسی خطاهای 401 و 403 را ساده‌تر می‌کند."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "api-scopes",
+    "tags": ["Security", "API Design"],
+    "source": "https://datatracker.ietf.org/doc/html/rfc6749#section-3.3",
+    "en": {
+      "title": "Designing API Scopes in a Microservices Architecture",
+      "description": "Scopes describe delegated access. They are one part of authorization, not a replacement for resource-level rules.",
+      "sections": [
+        {
+          "title": "Name the capability",
+          "paragraphs": [
+            "A scope should communicate what access a client is requesting. Prefer understandable capabilities over names that expose incidental implementation details. Decide which API owns the meaning of each scope.",
+            "Avoid a single unrestricted scope simply because the first client needs broad access. It can make later separation difficult."
+          ]
+        },
+        {
+          "title": "Keep scopes and business rules separate",
+          "paragraphs": [
+            "Permission to call an order API does not imply permission to read every customer’s order. The API still needs to check ownership, roles or other business rules for the specific resource.",
+            "Also distinguish the token audience from its scopes. One describes the intended recipient; the other describes the delegated access."
+          ]
+        },
+        {
+          "title": "Review the complete contract",
+          "paragraphs": [
+            "For each client, list required operations and the least access that supports them. Keep identity-server registration and API authorization policy aligned.",
+            "Test missing scopes, wrong audiences and access to someone else’s resource. A documented scope is useful only when the receiving API enforces its intended boundary."
+          ]
+        }
+      ]
+    },
+    "fa": {
+      "title": "طراحی API Scope در معماری Microservices",
+      "description": "Scope دسترسی واگذارشده را توصیف می‌کند؛ بخشی از مجوزدهی است، نه جایگزین قواعد دسترسی به هر منبع.",
+      "sections": [
+        {
+          "title": "قابلیت را نام‌گذاری کنید",
+          "paragraphs": [
+            "Scope باید روشن کند کلاینت چه دسترسی‌ای می‌خواهد. نام قابلیت قابل فهم را به نام وابسته به جزئیات اتفاقی پیاده‌سازی ترجیح دهید. مشخص کنید معنای هر scope در مالکیت کدام API است.",
+            "صرفاً به دلیل نیاز اولین کلاینت، یک scope نامحدود برای همه‌چیز نسازید. این تصمیم تفکیک دسترسی در آینده را دشوار می‌کند."
+          ]
+        },
+        {
+          "title": "Scope را از قانون کسب‌وکار جدا کنید",
+          "paragraphs": [
+            "اجازه فراخوانی API سفارش، اجازه خواندن سفارش همه مشتریان نیست. API همچنان باید مالکیت، نقش یا قانون مرتبط با همان منبع را بررسی کند.",
+            "مخاطب توکن را هم از scope جدا کنید. اولی گیرنده مورد نظر را مشخص می‌کند و دومی نوع دسترسی واگذارشده را."
+          ]
+        },
+        {
+          "title": "کل قرارداد را بازبینی کنید",
+          "paragraphs": [
+            "برای هر کلاینت، عملیات لازم و حداقل دسترسی مورد نیاز را بنویسید. ثبت سرویس هویت باید با سیاست مجوز API هماهنگ باشد.",
+            "نبود scope، مخاطب نادرست و دسترسی به منبع شخص دیگر را تست کنید. مستند بودن scope زمانی مفید است که API دریافت‌کننده مرز آن را اعمال کند."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "rabbitmq-or-synchronous",
+    "tags": ["Messaging", "RabbitMQ", "gRPC"],
+    "source": "https://www.rabbitmq.com/docs/reliability",
+    "en": {
+      "title": "RabbitMQ vs Synchronous Service Communication",
+      "description": "Choose communication by consistency, failure behavior and who needs an answer now.",
+      "sections": [
+        {
+          "title": "Ask whether the caller needs an answer",
+          "paragraphs": [
+            "A synchronous call is useful when the current decision requires information from another service. It also makes that dependency part of the request’s latency and availability.",
+            "A message is useful when another capability can react independently. Sending it does not mean that processing has already completed."
+          ]
+        },
+        {
+          "title": "Messaging moves the failure boundary",
+          "paragraphs": [
+            "A broker can decouple the lifetime of a producer from a consumer, but it does not remove failure. Delivery acknowledgements, duplicate handling, retries and poison messages still require deliberate design.",
+            "A consumer should make processing safe to repeat where possible. Retries without idempotency can repeat business effects."
+          ]
+        },
+        {
+          "title": "Make the user-visible state explicit",
+          "paragraphs": [
+            "For asynchronous work, define pending, completed and failed states. For synchronous calls, define timeouts and what the caller should do when the result is uncertain.",
+            "RabbitMQ and gRPC are not interchangeable labels for the same design. Model the workflow first, then choose the contract and transport."
+          ]
+        }
+      ]
+    },
+    "fa": {
+      "title": "RabbitMQ یا ارتباط همزمان بین سرویس‌ها؟",
+      "description": "انتخاب ارتباط را بر اساس سازگاری داده، رفتار هنگام خطا و نیاز به پاسخ فوری انجام دهید.",
+      "sections": [
+        {
+          "title": "آیا فراخواننده همین حالا پاسخ می‌خواهد؟",
+          "paragraphs": [
+            "فراخوانی همزمان وقتی مفید است که تصمیم فعلی به اطلاعات سرویس دیگر وابسته باشد. در مقابل، تأخیر و دسترس‌پذیری آن سرویس هم وارد مسیر درخواست می‌شود.",
+            "پیام زمانی مناسب است که قابلیت دیگر بتواند مستقل واکنش نشان دهد. ارسال پیام به معنی تمام شدن پردازش آن نیست."
+          ]
+        },
+        {
+          "title": "پیام‌رسانی مرز شکست را جابه‌جا می‌کند",
+          "paragraphs": [
+            "واسط پیام می‌تواند طول عمر تولیدکننده و مصرف‌کننده را مستقل کند، اما شکست را حذف نمی‌کند. تأیید دریافت، تحویل تکراری، تلاش مجدد و پیام‌های پردازش‌ناپذیر به طراحی آگاهانه نیاز دارند.",
+            "تا حد ممکن پردازش مصرف‌کننده را برای تکرار امن طراحی کنید. تلاش مجدد بدون idempotency ممکن است اثر کسب‌وکار را دوباره اعمال کند."
+          ]
+        },
+        {
+          "title": "وضعیت قابل مشاهده را روشن کنید",
+          "paragraphs": [
+            "برای کار غیرهمزمان، وضعیت در انتظار، کامل‌شده و ناموفق را تعریف کنید. برای فراخوانی همزمان، زمان انتظار و رفتار هنگام نامشخص بودن نتیجه را مشخص کنید.",
+            "RabbitMQ و gRPC دو نام قابل جایگزین برای یک طراحی نیستند. ابتدا جریان کار را مدل کنید، سپس قرارداد و ابزار انتقال را انتخاب کنید."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "dotnet-docker-production",
+    "tags": [".NET", "Docker", "Infrastructure"],
+    "source": "https://learn.microsoft.com/en-us/dotnet/core/docker/build-container",
+    "en": {
+      "title": "Building a Production .NET Microservices Environment with Docker",
+      "description": "A container image is one part of a production environment. Configuration, identity and operational behavior complete the picture.",
+      "sections": [
+        {
+          "title": "Build a reproducible artifact",
+          "paragraphs": [
+            "Use a multi-stage build to separate compilation from the runtime image. Pin a suitable supported base image, restore dependencies predictably and keep build tools out of the final container.",
+            "Do not bake secrets into image layers. Provide environment-specific configuration through the deployment environment."
+          ]
+        },
+        {
+          "title": "Design the runtime contract",
+          "paragraphs": [
+            "Decide which address the application listens on, which process owns shutdown, and how health is reported. The runtime user should have only the permissions needed by the application.",
+            "Persistent data must outlive a replaced container. Treat volumes and database backups as separate concerns from rebuilding an image."
+          ]
+        },
+        {
+          "title": "Validate through the public path",
+          "paragraphs": [
+            "Test the service behind the actual reverse proxy and TLS endpoint, including authentication redirects and forwarded headers. A healthy localhost endpoint does not validate the public path.",
+            "Record a small operational checklist: startup, readiness, dependency failure, rollback and log collection. Production readiness is behavior you can verify, not a Dockerfile label."
+          ]
+        }
+      ]
+    },
+    "fa": {
+      "title": "ساخت محیط عملیاتی Microservices دات‌نت با Docker",
+      "description": "ایمیج کانتینر فقط بخشی از محیط عملیاتی است؛ تنظیمات، هویت و رفتار اجرایی تصویر را کامل می‌کنند.",
+      "sections": [
+        {
+          "title": "خروجی قابل بازتولید بسازید",
+          "paragraphs": [
+            "با ساخت چندمرحله‌ای، کامپایل را از ایمیج زمان اجرا جدا کنید. یک نسخه پایه پشتیبانی‌شده انتخاب کنید، وابستگی‌ها را قابل پیش‌بینی بازیابی کنید و ابزار ساخت را وارد کانتینر نهایی نکنید.",
+            "اطلاعات محرمانه را در لایه ایمیج قرار ندهید. تنظیمات هر محیط را از مسیر استقرار ارائه کنید."
+          ]
+        },
+        {
+          "title": "قرارداد زمان اجرا را تعریف کنید",
+          "paragraphs": [
+            "نشانی گوش دادن برنامه، رفتار پایان فرایند و روش اعلام سلامت را مشخص کنید. کاربر اجرایی باید فقط دسترسی مورد نیاز برنامه را داشته باشد.",
+            "داده پایدار باید پس از جایگزین شدن کانتینر باقی بماند. مدیریت volume و پشتیبان پایگاه داده را از بازسازی ایمیج جدا بدانید."
+          ]
+        },
+        {
+          "title": "از مسیر عمومی اعتبارسنجی کنید",
+          "paragraphs": [
+            "سرویس را پشت پراکسی واقعی و endpoint دارای TLS تست کنید؛ از جمله نشانی‌های بازگشت ورود و هدرهای هدایت‌شده. سالم بودن localhost مسیر عمومی را تأیید نمی‌کند.",
+            "چک‌لیست کوتاهی برای راه‌اندازی، آمادگی، شکست وابستگی، بازگشت نسخه و جمع‌آوری لاگ داشته باشید. آمادگی عملیاتی رفتار قابل بررسی است، نه نامی روی Dockerfile."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "tls-dns-reverse-proxy",
+    "tags": ["Troubleshooting", "TLS", "DNS"],
+    "source": "https://doc.traefik.io/traefik/https/overview/",
+    "en": {
+      "title": "Debugging TLS, DNS and Reverse Proxy Problems",
+      "description": "Follow the request in order. A failure at one layer can look like an application bug at another.",
+      "sections": [
+        {
+          "title": "Name resolution comes first",
+          "paragraphs": [
+            "Confirm that the requested hostname resolves to the intended destination. Consider cached DNS answers and the difference between the host network, a container network and an external client.",
+            "Check the same name from the environment where the failure occurs. A successful lookup from your workstation is not evidence about another network."
+          ]
+        },
+        {
+          "title": "Then validate transport and routing",
+          "paragraphs": [
+            "Inspect certificate hostname coverage, validity and chain trust. Do not fix an invalid certificate by disabling validation in application code.",
+            "Once TLS succeeds, check proxy routing rules, upstream host and port, and the protocol expected by the backend. Separate a route mismatch from an unavailable upstream."
+          ]
+        },
+        {
+          "title": "Finally inspect application assumptions",
+          "paragraphs": [
+            "Applications behind TLS termination may need correct forwarded scheme and host information. Incorrect assumptions can affect redirects, secure cookies and identity callback URLs.",
+            "Write down the path from public hostname to process. Test each boundary with the smallest possible request, and keep credentials out of captured diagnostics."
+          ]
+        }
+      ]
+    },
+    "fa": {
+      "title": "عیب‌یابی TLS، DNS و پراکسی معکوس",
+      "description": "مسیر درخواست را به ترتیب دنبال کنید؛ شکست در یک لایه ممکن است در لایه دیگر شبیه خطای برنامه دیده شود.",
+      "sections": [
+        {
+          "title": "ابتدا تبدیل نام به نشانی",
+          "paragraphs": [
+            "مطمئن شوید نام دامنه به مقصد مورد نظر اشاره می‌کند. پاسخ کش‌شده DNS و تفاوت شبکه میزبان، شبکه کانتینر و کلاینت بیرونی را در نظر بگیرید.",
+            "همان نام را از محیطی بررسی کنید که خطا در آن رخ می‌دهد. پاسخ درست در سیستم شما، وضعیت شبکه دیگر را ثابت نمی‌کند."
+          ]
+        },
+        {
+          "title": "سپس انتقال و مسیریابی",
+          "paragraphs": [
+            "پوشش نام دامنه در گواهی، زمان اعتبار و اعتماد زنجیره را بررسی کنید. مشکل گواهی را با غیرفعال کردن اعتبارسنجی در کد برنامه حل نکنید.",
+            "پس از موفقیت TLS، قواعد پراکسی، میزبان و پورت upstream و پروتکل مورد انتظار بک‌اند را بررسی کنید. نبود مسیر را از در دسترس نبودن upstream جدا کنید."
+          ]
+        },
+        {
+          "title": "در پایان، فرض‌های برنامه",
+          "paragraphs": [
+            "برنامه پشت TLS termination ممکن است به اطلاعات درست scheme و host در هدرهای هدایت‌شده نیاز داشته باشد. فرض اشتباه می‌تواند بازگشت مرورگر، کوکی امن و نشانی callback هویت را مختل کند.",
+            "مسیر نام عمومی تا فرایند برنامه را بنویسید. هر مرز را با کوچک‌ترین درخواست بررسی کنید و اطلاعات ورود را از خروجی عیب‌یابی حذف کنید."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "product-seller-data-boundaries",
+    "tags": ["DDD", "Data Ownership"],
+    "source": "https://learn.microsoft.com/en-us/azure/architecture/microservices/data-considerations",
+    "en": {
+      "title": "Why Product Services Should Avoid Direct Dependencies on Seller Databases",
+      "description": "Convenient database access can quietly make one service’s internal schema another service’s contract.",
+      "sections": [
+        {
+          "title": "A database is an implementation boundary",
+          "paragraphs": [
+            "If Product joins tables owned by Seller, a Seller schema change becomes a Product deployment concern. Local database access may be fast, but the organizational and release coupling remains.",
+            "Direct writes are even more dangerous because they bypass the rules owned by Seller. Keep the service responsible for its own invariants."
+          ]
+        },
+        {
+          "title": "Copy the view, not the ownership",
+          "paragraphs": [
+            "Product often needs only a small subset of seller information to answer a query. A local read model can hold that subset without becoming the authoritative seller record.",
+            "Define which fields Product needs and how changes reach the projection. Avoid copying the whole Seller schema simply to reproduce remote joins locally."
+          ]
+        },
+        {
+          "title": "Choose consistency deliberately",
+          "paragraphs": [
+            "A local projection may lag behind its source. Decide which decisions can tolerate that delay and which need an authoritative check during a business operation.",
+            "Document update, deletion and recovery behavior. Removing a database dependency is useful only if the replacement contract is explicit."
+          ]
+        }
+      ]
+    },
+    "fa": {
+      "title": "چرا سرویس محصول نباید به پایگاه داده فروشنده وابسته باشد؟",
+      "description": "دسترسی راحت به پایگاه داده ممکن است طرح داخلی یک سرویس را بی‌صدا به قرارداد سرویس دیگر تبدیل کند.",
+      "sections": [
+        {
+          "title": "پایگاه داده مرز پیاده‌سازی است",
+          "paragraphs": [
+            "اگر Product روی جدول‌های متعلق به Seller پیوند بزند، تغییر ساختار Seller به دغدغه انتشار Product تبدیل می‌شود. دسترسی محلی شاید سریع باشد، اما وابستگی در تغییر و انتشار باقی می‌ماند.",
+            "نوشتن مستقیم خطر بیشتری دارد؛ چون قواعد متعلق به Seller را دور می‌زند. مسئولیت حفظ قواعد باید در سرویس مالک بماند."
+          ]
+        },
+        {
+          "title": "نمای مورد نیاز را کپی کنید، نه مالکیت را",
+          "paragraphs": [
+            "Product اغلب برای پاسخ به پرس‌وجو فقط به بخش کوچکی از اطلاعات فروشنده نیاز دارد. یک read model محلی می‌تواند همان بخش را نگه دارد، بدون اینکه رکورد اصلی فروشنده باشد.",
+            "فیلدهای مورد نیاز و مسیر رسیدن تغییرات به مدل را مشخص کنید. تمام ساختار Seller را فقط برای بازسازی پیوندهای راه دور کپی نکنید."
+          ]
+        },
+        {
+          "title": "سازگاری را آگاهانه انتخاب کنید",
+          "paragraphs": [
+            "نمای محلی ممکن است از منبع عقب بماند. تصمیم بگیرید کدام عملیات این تأخیر را تحمل می‌کنند و کدام به بررسی مرجع اصلی در زمان عملیات نیاز دارند.",
+            "رفتار به‌روزرسانی، حذف و بازیابی را مستند کنید. حذف وابستگی پایگاه داده زمانی مفید است که قرارداد جایگزین روشن باشد."
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "supplier-read-model",
+    "tags": ["Read Models", "Event-Driven Architecture"],
+    "source": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs",
+    "en": {
+      "title": "SupplierReadModel: Keeping Microservices Decoupled",
+      "description": "A local projection gives Product the seller information it needs without sharing database ownership.",
+      "sections": [
+        {
+          "title": "Define the question the model answers",
+          "paragraphs": [
+            "Start with Product queries: which supplier fields must be available when reading or presenting a product? Store only those fields and retain a stable supplier identifier.",
+            "The name SupplierReadModel communicates purpose. It is a query model in Product, not an alternative write API for Seller."
+          ]
+        },
+        {
+          "title": "Treat projection updates as a contract",
+          "paragraphs": [
+            "Messages or other explicit synchronization contracts carry changes from the owning service. Consumers need a defined behavior for duplicate, delayed or out-of-order updates.",
+            "A version or ordering rule may be appropriate, but it must come from the real contract. Do not invent sequence guarantees that the transport does not provide."
+          ]
+        },
+        {
+          "title": "Plan recovery as well as normal delivery",
+          "paragraphs": [
+            "A projection needs a way to be reconciled or rebuilt when it is missing data. Decide how to observe lag and how a query behaves before the supplier record arrives.",
+            "For critical operations, validate authoritative business facts at the appropriate boundary. A read model reduces coupling; it does not make consistency requirements disappear."
+          ]
+        }
+      ]
+    },
+    "fa": {
+      "title": "SupplierReadModel؛ استقلال سرویس‌ها با یک مدل خواندن محلی",
+      "description": "یک نمای محلی، اطلاعات مورد نیاز فروشنده را در اختیار Product می‌گذارد؛ بدون اشتراک در مالکیت پایگاه داده.",
+      "sections": [
+        {
+          "title": "پرسشی را که مدل پاسخ می‌دهد مشخص کنید",
+          "paragraphs": [
+            "از پرس‌وجوهای Product شروع کنید: هنگام خواندن یا نمایش محصول، چه اطلاعاتی از تأمین‌کننده لازم است؟ فقط همان فیلدها را همراه شناسه پایدار تأمین‌کننده نگه دارید.",
+            "نام SupplierReadModel هدف را روشن می‌کند. این یک مدل پرس‌وجو در Product است، نه API جایگزین برای تغییر داده Seller."
+          ]
+        },
+        {
+          "title": "به‌روزرسانی مدل یک قرارداد است",
+          "paragraphs": [
+            "پیام‌ها یا قرارداد همگام‌سازی صریح، تغییر را از سرویس مالک منتقل می‌کنند. مصرف‌کننده باید رفتار مشخصی برای پیام تکراری، با تأخیر یا خارج از ترتیب داشته باشد.",
+            "ممکن است قانون نسخه یا ترتیب لازم باشد، اما باید از قرارداد واقعی بیاید. تضمین ترتیبی را که ابزار انتقال ندارد فرض نکنید."
+          ]
+        },
+        {
+          "title": "بازیابی را هم طراحی کنید",
+          "paragraphs": [
+            "مدل خواندن به روشی برای تطبیق یا بازسازی پس از از دست رفتن داده نیاز دارد. مشخص کنید تأخیر چطور دیده می‌شود و پرس‌وجو پیش از رسیدن رکورد تأمین‌کننده چه پاسخی می‌دهد.",
+            "در عملیات حساس، واقعیت‌های اصلی کسب‌وکار را در مرز مناسب بررسی کنید. read model وابستگی را کم می‌کند؛ نیاز به سازگاری را حذف نمی‌کند."
+          ]
+        }
+      ]
+    }
+  }
+]
