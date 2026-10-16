@@ -135,7 +135,7 @@ export function ContentPage({
               </p>
               <Link
                 className="text-link"
-                href={localizedPath(locale, "projects/Baruq")}
+                href={localizedPath(locale, "projects/baruq")}
               >
                 {c.projects[0].title} · {c.ui.readCase}
                 <Arrow />

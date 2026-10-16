@@ -7,7 +7,7 @@ const sections = [
   "",
   "about",
   "projects",
-  "projects/Baruq",
+  "projects/baruq",
   "services",
   "experience",
   "blog",
@@ -36,8 +36,8 @@ test("language switching preserves equivalent nested routes in both directions",
     assert.equal(i18n.switchLocale(persian, "en"), english);
   }
   assert.equal(
-    i18n.localizedPath("fa", "/projects/Baruq"),
-    "/fa/projects/Baruq",
+    i18n.localizedPath("fa", "/projects/baruq"),
+    "/fa/projects/baruq",
   );
   assert.equal(i18n.switchLocale("/engineering", "fa"), "/engineering");
   assert.equal(i18n.otherLocale("en"), "fa");
@@ -82,7 +82,7 @@ test("configured public contact and resume links accept useful URLs and reject s
   const invalid = loadTsModule("src/lib/site-config.ts", {
     NEXT_PUBLIC_CONTACT_EMAIL: "invalid-email",
     NEXT_PUBLIC_GITHUB_URL: "javascript:alert(1)",
-    NEXT_PUBLIC_LINKEDIN_URL: "https://www.linkedin.com/in/safar-moghadamzadeh-a04bbab4",
+    NEXT_PUBLIC_LINKEDIN_URL: "javascript:alert(1)",
     NEXT_PUBLIC_RESUME_EN_CONSULTING:
       "data:text/html,<script>alert(1)</script>",
   }).siteConfig;

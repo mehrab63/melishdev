@@ -59,7 +59,7 @@ Every route below exists under both `/en` and `/fa`:
 | `/`                                   | Home, services, featured work, process, experience, notes and consulting CTA |
 | `/about`                              | Biography, principles, education and experience                              |
 | `/projects`                           | Four engineering case studies                                                |
-| `/projects/Baruq`                     | Detailed Baruq architecture study                                            |
+| `/projects/baruq`                     | Detailed Baruq architecture study                                            |
 | `/projects/identity-platform`         | Identity and authorization study                                             |
 | `/projects/distributed-backend`       | Service communication and ownership study                                    |
 | `/projects/production-infrastructure` | Container, proxy, DNS and TLS study                                          |

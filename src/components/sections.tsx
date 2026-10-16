@@ -247,7 +247,7 @@ export function FeaturedProject({ locale }: { locale: Locale }) {
         </div>
         <Link
           className="button button-lime"
-          href={localizedPath(locale, "projects/Baruq")}
+          href={localizedPath(locale, "projects/baruq")}
         >
           {c.ui.readCase}
           <Arrow />

@@ -171,7 +171,7 @@ for (const locale of ['en', 'fa']) {
   } catch (error) { failures.push(`${locale} Open Graph image: ${error.message}`); }
 }
 try {
-  const { response } = await get('/de/projects/Baruq');
+  const { response } = await get('/de/projects/baruq');
   check('unsupported locale', () => assert.equal(response.status, 404));
 } catch (error) { failures.push(`unsupported locale: ${error.message}`); }
 

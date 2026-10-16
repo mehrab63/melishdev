@@ -135,7 +135,7 @@
   },
   "projects": [
     {
-      "slug": "Baruq",
+      "slug": "baruq",
       "title": "Baruq",
       "type": "Multi-Vendor Marketplace",
       "description": "A production-oriented multi-vendor marketplace platform designed around microservices, event-driven architecture, centralized identity, and containerized infrastructure.",

@@ -19,7 +19,7 @@ const tech = [
 export function CaseStudy({ locale, slug }: { locale: Locale; slug: string }) {
   const c = getContent(locale),
     project = c.projects.find((p) => p.slug === slug)!;
-  const isBaruq = slug === "Baruq";
+  const isBaruq = slug === "baruq";
   const indices =
     slug === "identity-platform"
       ? [2, 4, 9]
